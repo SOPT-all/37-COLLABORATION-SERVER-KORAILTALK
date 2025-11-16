@@ -37,6 +37,9 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
+    //queryDSL
+    implementation 'io.github.openfeign.querydsl:querydsl-jpa:6.11'
+
     //test
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
