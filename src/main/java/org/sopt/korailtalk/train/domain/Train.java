@@ -33,12 +33,12 @@ public class Train extends BaseTimeEntity {
   private Long id;
 
   private LocalDateTime startAt;
-  private LocalDateTime endAt;
+  private LocalDateTime arriveAt;
 
   @Enumerated(EnumType.STRING)
   private TrainType trainType;
 
-  private String trailNumber;
+  private String trainNumber;
 
   private String origin;
   private String destination;
@@ -51,4 +51,5 @@ public class Train extends BaseTimeEntity {
 
   @OneToMany(mappedBy = "train")
   private List<ReservationQueue> reservationQueues = new ArrayList<>();
+
 }

@@ -25,6 +25,9 @@ import org.sopt.korailtalk.train.domain.Train;
 @Table(name = "reservation_queue")
 public class ReservationQueue extends BaseTimeEntity {
 
+  // 예약 대기 생성 후 10분 후 만료
+  private static final long RESERVATION_EXPIRATION_MINUTES = 10;
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "reservation_queue_id")
@@ -38,4 +41,14 @@ public class ReservationQueue extends BaseTimeEntity {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "train_id")
   private Train train;
+
+  private ReservationQueue(SeatType seatType, Train train) {
+    this.seatType = seatType;
+    this.train = train;
+    this.expireAt = LocalDateTime.now().plusMinutes(RESERVATION_EXPIRATION_MINUTES);
+  }
+
+  public static ReservationQueue create(SeatType seatType, Train train) {
+    return new ReservationQueue(seatType, train);
+  }
 }

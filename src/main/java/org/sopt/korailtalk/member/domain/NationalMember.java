@@ -6,17 +6,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sopt.korailtalk.global.entity.BaseTimeEntity;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "national_member")
-public class NationalMember extends BaseTimeEntity {
+public class NationalMember {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "national_member_id")
@@ -29,5 +28,5 @@ public class NationalMember extends BaseTimeEntity {
   private String password;
 
   @Column(nullable = false)
-  private LocalDateTime birthdate;
+  private LocalDate birthdate;
 }
