@@ -15,7 +15,7 @@ import org.sopt.korailtalk.global.entity.BaseTimeEntity;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "national_members")
+@Table(name = "national_member")
 public class NationalMember extends BaseTimeEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

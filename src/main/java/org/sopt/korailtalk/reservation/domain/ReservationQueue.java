@@ -22,7 +22,7 @@ import org.sopt.korailtalk.train.domain.Train;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "reservation_queues")
+@Table(name = "reservation_queue")
 public class ReservationQueue extends BaseTimeEntity {
 
   @Id
