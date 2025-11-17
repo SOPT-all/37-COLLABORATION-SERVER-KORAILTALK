@@ -38,7 +38,10 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     //queryDSL
-    implementation 'io.github.openfeign.querydsl:querydsl-jpa:6.11'
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
 
     //test
     testImplementation platform('org.junit:junit-bom:5.10.0')
