@@ -13,11 +13,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.sopt.korailtalk.global.domain.TrainType;
 import org.sopt.korailtalk.global.entity.BaseTimeEntity;
+import org.sopt.korailtalk.reservation.domain.ReservationQueue;
 
 @Entity
 @Getter
@@ -45,4 +48,7 @@ public class Train extends BaseTimeEntity {
 
   @OneToOne(mappedBy = "train", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private PremiumSeat premiumSeat;
+
+  @OneToMany(mappedBy = "train")
+  private List<ReservationQueue> reservationQueues = new ArrayList<>();
 }
