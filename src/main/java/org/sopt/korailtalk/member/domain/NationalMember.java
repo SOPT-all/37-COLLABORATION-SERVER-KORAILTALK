@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,4 +30,24 @@ public class NationalMember {
 
   @Column(nullable = false)
   private LocalDate birthdate;
+
+  private static final DateTimeFormatter BIRTHDATE_FORMATTER = DateTimeFormatter.ofPattern("yyMMdd");
+
+  public boolean isMatch(String inputPassword, String inputBirthdate6Digits) {
+    if (!this.password.equals(inputPassword)) {
+      return false;
+    }
+
+    LocalDate inputDate = parseBirthdate(inputBirthdate6Digits);
+    return this.birthdate.equals(inputDate);
+  }
+
+  // 날짜 변환 로직
+  private LocalDate parseBirthdate(String birthdateStr) {
+    LocalDate parsedDate = LocalDate.parse(birthdateStr, BIRTHDATE_FORMATTER);
+    if (parsedDate.isAfter(LocalDate.now())) {
+      parsedDate = parsedDate.minusYears(100);
+    }
+    return parsedDate;
+  }
 }
