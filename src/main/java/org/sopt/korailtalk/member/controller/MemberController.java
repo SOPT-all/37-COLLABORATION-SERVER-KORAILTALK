@@ -2,9 +2,11 @@ package org.sopt.korailtalk.member.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.sopt.korailtalk.global.response.base.BaseCode;
 import org.sopt.korailtalk.global.response.dto.SuccessResponse;
 import org.sopt.korailtalk.member.dto.NationalVerifyRequest;
 import org.sopt.korailtalk.member.dto.NationalVerifyResponse;
+import org.sopt.korailtalk.member.exception.MemberErrorCode;
 import org.sopt.korailtalk.member.exception.MemberSuccessCode;
 import org.sopt.korailtalk.member.service.MemberService;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +28,12 @@ public class MemberController {
     NationalVerifyResponse response = memberService.verifyNationalMember(request);
 
     // 인증 성공 여부
-    MemberSuccessCode successCode = response.verified()
+    BaseCode code = response.verified()
         ? MemberSuccessCode.VERIFICATION_SUCCESS
-        : MemberSuccessCode.VERIFICATION_FAILED;
+        : MemberErrorCode.VERIFICATION_FAILED;
 
     return ResponseEntity
-        .status(successCode.getHttpStatus())
-        .body(SuccessResponse.of(successCode, response));
+        .status(code.getHttpStatus())
+        .body(SuccessResponse.of(code, response));
   }
 }

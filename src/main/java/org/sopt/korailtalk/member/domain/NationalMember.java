@@ -33,21 +33,11 @@ public class NationalMember {
 
   private static final DateTimeFormatter BIRTHDATE_FORMATTER = DateTimeFormatter.ofPattern("yyMMdd");
 
-  public boolean isMatch(String inputPassword, String inputBirthdate6Digits) {
+  public boolean isMatch(String inputPassword, LocalDate inputBirthDate) {
     if (!this.password.equals(inputPassword)) {
       return false;
     }
-
-    LocalDate inputDate = parseBirthdate(inputBirthdate6Digits);
-    return this.birthdate.equals(inputDate);
+    return this.birthdate.equals(inputBirthDate);
   }
 
-  // 날짜 변환 로직
-  private LocalDate parseBirthdate(String birthdateStr) {
-    LocalDate parsedDate = LocalDate.parse(birthdateStr, BIRTHDATE_FORMATTER);
-    if (parsedDate.isAfter(LocalDate.now())) {
-      parsedDate = parsedDate.minusYears(100);
-    }
-    return parsedDate;
-  }
 }

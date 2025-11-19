@@ -1,6 +1,6 @@
 package org.sopt.korailtalk.global.exception;
 
-import org.sopt.korailtalk.global.response.base.BaseErrorCode;
+import org.sopt.korailtalk.global.response.base.BaseCode;
 import org.sopt.korailtalk.global.response.code.ErrorCode;
 import org.sopt.korailtalk.global.response.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(BusinessException.class)
 	public ResponseEntity<ErrorResponse> handleMyException(BusinessException e) {
-		BaseErrorCode errorCode = e.getBaseErrorCode();
+		BaseCode errorCode = e.getBaseCode();
 		return ResponseEntity.status(errorCode.getHttpStatus())
 			.body(ErrorResponse.of(errorCode));
 	}
@@ -73,7 +73,7 @@ public class GlobalExceptionHandler {
 			.body(response);
 	}
 
-	private ResponseEntity<ErrorResponse> buildErrorResponse(BaseErrorCode errorCode, Object detail) {
+	private ResponseEntity<ErrorResponse> buildErrorResponse(BaseCode errorCode, Object detail) {
 		return ResponseEntity.status(errorCode.getHttpStatus())
 			.body(ErrorResponse.of(errorCode, detail));
 	}

@@ -1,7 +1,9 @@
 package org.sopt.korailtalk.member.service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.sopt.korailtalk.global.util.DateUtil;
 import org.sopt.korailtalk.member.domain.NationalMember;
 import org.sopt.korailtalk.member.dto.NationalVerifyRequest;
 import org.sopt.korailtalk.member.dto.NationalVerifyResponse;
@@ -23,8 +25,10 @@ public class MemberServiceImpl implements MemberService {
 
     NationalMember member = memberOp.get();
 
-    boolean isVerified = member.isMatch(request.password(), request.birthdate());
+    LocalDate inputBirthDate = DateUtil.parseYYMMDD(request.birthdate());
 
-    return NationalVerifyResponse.of(isVerified);
+    boolean isMatch = member.isMatch(request.password(), inputBirthDate);
+
+    return NationalVerifyResponse.of(isMatch);
   }
 }
