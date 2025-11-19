@@ -24,9 +24,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     // 좌석 수 복구
     Train train = reservation.getTrain();
-
-    // TODO: feat/#5 머지 되면 주석 해제하기
-    // train.increaseRemainingSeat(reservation.getSeatType());
+    train.increaseRemainingSeat(reservation.getSeatType());
 
     reservationQueueRepository.delete(reservation);
 

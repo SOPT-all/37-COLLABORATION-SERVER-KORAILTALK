@@ -1,6 +1,6 @@
 package org.sopt.korailtalk.train.exception;
 
-import org.sopt.korailtalk.global.response.base.BaseSuccessCode;
+import org.sopt.korailtalk.global.response.base.BaseCode;
 import org.springframework.http.HttpStatus;
 
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum TrainSuccessCode implements BaseSuccessCode {
+public enum TrainSuccessCode implements BaseCode {
 
 	//200 OK
 
