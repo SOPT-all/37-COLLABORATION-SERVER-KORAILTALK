@@ -23,7 +23,7 @@ public class TrainController {
 
 	private final TrainReservationFacade trainReservationFacade;
 
-	@PostMapping("{trainId}")
+	@PostMapping("/{trainId}")
 	ResponseEntity<SuccessResponse<TrainInfoResponse>> getTrainInfo(
 		@PathVariable("trainId") Long trainId,
 		@RequestBody @Valid TrainInfoRequest request
