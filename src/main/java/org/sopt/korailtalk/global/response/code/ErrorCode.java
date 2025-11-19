@@ -1,6 +1,6 @@
 package org.sopt.korailtalk.global.response.code;
 
-import org.sopt.korailtalk.global.response.base.BaseErrorCode;
+import org.sopt.korailtalk.global.response.base.BaseCode;
 import org.springframework.http.HttpStatus;
 
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum ErrorCode implements BaseErrorCode {
+public enum ErrorCode implements BaseCode {
 	/*
 	400 BAD REQUEST
 	 */

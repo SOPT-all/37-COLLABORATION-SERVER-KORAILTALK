@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,4 +30,14 @@ public class NationalMember {
 
   @Column(nullable = false)
   private LocalDate birthdate;
+
+  private static final DateTimeFormatter BIRTHDATE_FORMATTER = DateTimeFormatter.ofPattern("yyMMdd");
+
+  public boolean isMatch(String inputPassword, LocalDate inputBirthDate) {
+    if (!this.password.equals(inputPassword)) {
+      return false;
+    }
+    return this.birthdate.equals(inputBirthDate);
+  }
+
 }
