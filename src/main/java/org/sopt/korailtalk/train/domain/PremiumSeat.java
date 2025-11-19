@@ -1,5 +1,8 @@
 package org.sopt.korailtalk.train.domain;
 
+import org.sopt.korailtalk.global.exception.BusinessException;
+import org.sopt.korailtalk.train.exception.TrainErrorCode;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,4 +31,16 @@ public class PremiumSeat {
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "train_id")
   private Train train;
+
+  public void decrease() {
+    if (remainingSeats <= 0) {
+      throw new BusinessException(TrainErrorCode.NO_AVAILABLE_SEAT);
+    }
+    this.remainingSeats--;
+  }
+
+  public void increase() {
+    this.remainingSeats++;
+  }
+
 }
