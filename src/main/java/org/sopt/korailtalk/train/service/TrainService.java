@@ -10,7 +10,6 @@ import org.sopt.korailtalk.train.presentation.dto.TrainInfoRequest;
 import org.sopt.korailtalk.train.presentation.dto.TrainInfoResponse;
 import org.sopt.korailtalk.train.repository.TrainRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +20,6 @@ public class TrainService {
 	private final TrainRepository trainRepository;
 	private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
-	@Transactional
 	public TrainInfoResponse getTrainInfo(Long trainId, TrainInfoRequest request, Long reservationId) {
 		Train train = findById(trainId);
 		SeatType seatType = request.seatType();
