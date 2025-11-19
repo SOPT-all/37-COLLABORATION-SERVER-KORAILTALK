@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 public enum TrainSuccessCode implements BaseSuccessCode {
 
 	//200 OK
+	GET_TRAIN_HOME_INFO_SUCCESS(HttpStatus.OK, "홈 화면 정보 조회가 성공하였습니다." ),
 
 	//201 CREATED
 	GET_TRAIN_INFO_SUCCESS(HttpStatus.CREATED, "열차 정보 조회 및 예약 대기 처리가 성공하였습니다."),
