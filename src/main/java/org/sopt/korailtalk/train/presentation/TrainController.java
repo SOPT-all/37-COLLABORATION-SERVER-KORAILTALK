@@ -3,10 +3,12 @@ package org.sopt.korailtalk.train.presentation;
 import org.sopt.korailtalk.global.response.dto.SuccessResponse;
 
 import org.sopt.korailtalk.train.exception.TrainSuccessCode;
+import org.sopt.korailtalk.train.presentation.dto.TrainHomeInfoResponse;
 import org.sopt.korailtalk.train.presentation.dto.TrainInfoRequest;
 import org.sopt.korailtalk.train.presentation.dto.TrainInfoResponse;
 import org.sopt.korailtalk.train.service.TrainReservationFacade;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +25,7 @@ public class TrainController {
 
 	private final TrainReservationFacade trainReservationFacade;
 
-	@PostMapping("{trainId}")
+	@PostMapping("/{trainId}")
 	ResponseEntity<SuccessResponse<TrainInfoResponse>> getTrainInfo(
 		@PathVariable("trainId") Long trainId,
 		@RequestBody @Valid TrainInfoRequest request
@@ -35,6 +37,17 @@ public class TrainController {
 		return ResponseEntity
 			.status(TrainSuccessCode.GET_TRAIN_INFO_SUCCESS.getHttpStatus())
 			.body(SuccessResponse.of(TrainSuccessCode.GET_TRAIN_INFO_SUCCESS, response));
+	}
+
+	@GetMapping("/home")
+	ResponseEntity<SuccessResponse<TrainHomeInfoResponse>> getHomeInfo() {
+		String origin = "서울";
+		String destination = "부산";
+
+		TrainHomeInfoResponse response = TrainHomeInfoResponse.of(origin, destination);
+		return ResponseEntity
+			.status(TrainSuccessCode.GET_TRAIN_HOME_INFO_SUCCESS.getHttpStatus())
+			.body(SuccessResponse.of(TrainSuccessCode.GET_TRAIN_HOME_INFO_SUCCESS, response));
 	}
 
 }
