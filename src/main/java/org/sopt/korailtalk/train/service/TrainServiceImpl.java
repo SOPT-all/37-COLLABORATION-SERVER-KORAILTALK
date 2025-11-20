@@ -1,6 +1,7 @@
 package org.sopt.korailtalk.train.service;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.sopt.korailtalk.global.domain.SeatType;
 import org.sopt.korailtalk.global.exception.BusinessException;
@@ -8,6 +9,8 @@ import org.sopt.korailtalk.train.domain.Train;
 import org.sopt.korailtalk.train.exception.TrainErrorCode;
 import org.sopt.korailtalk.train.presentation.dto.TrainInfoRequest;
 import org.sopt.korailtalk.train.presentation.dto.TrainInfoResponse;
+import org.sopt.korailtalk.train.presentation.dto.TrainsRequest;
+import org.sopt.korailtalk.train.presentation.dto.TrainsResponse;
 import org.sopt.korailtalk.train.repository.TrainRepository;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +52,37 @@ public class TrainServiceImpl implements TrainService {
 			price = train.getPremiumSeat().getPrice();
 		}
 		return price;
+	}
+
+	public TrainsResponse getTrains(TrainsRequest request) {
+
+		List<Train> trains = trainRepository.findTrainsByFilter(
+				request.origin(),
+				request.destination(),
+				request.trainType(),
+				request.seatType(),
+				request.isBookAvailable(),
+				request.cursor()
+		);
+
+		String nextCursor = trains.isEmpty() ?
+				null :
+				String.valueOf(trains.get(trains.size() - 1).getId());
+
+		int total = trainRepository.countTrainsByFilter(
+				request.origin(),
+				request.destination(),
+				request.trainType(),
+				request.seatType(),
+				request.isBookAvailable()
+		);
+
+		return TrainsResponse.from(
+				request.origin(),
+				request.destination(),
+				total,
+				nextCursor,
+				trains
+		);
 	}
 }
