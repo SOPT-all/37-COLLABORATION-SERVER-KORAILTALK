@@ -13,6 +13,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import java.util.ArrayList;
@@ -71,4 +72,7 @@ public class Train extends BaseTimeEntity {
 			premiumSeat.increase();
 	}
 
+	public int getDuration() {
+		return (int) Duration.between(this.startAt, this.arriveAt).toMinutes();
+	}
 }
