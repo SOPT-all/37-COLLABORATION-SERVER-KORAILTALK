@@ -1,6 +1,6 @@
 package org.sopt.korailtalk.train.exception;
 
-import org.sopt.korailtalk.global.response.base.BaseSuccessCode;
+import org.sopt.korailtalk.global.response.base.BaseCode;
 import org.springframework.http.HttpStatus;
 
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum TrainSuccessCode implements BaseSuccessCode {
+public enum TrainSuccessCode implements BaseCode {
 
 	//200 OK
 	GET_TRAIN_HOME_INFO_SUCCESS(HttpStatus.OK, "홈 화면 정보 조회가 성공하였습니다." ),

@@ -1,6 +1,6 @@
 package org.sopt.korailtalk.train.exception;
 
-import org.sopt.korailtalk.global.response.base.BaseErrorCode;
+import org.sopt.korailtalk.global.response.base.BaseCode;
 import org.springframework.http.HttpStatus;
 
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum TrainErrorCode implements BaseErrorCode {
+public enum TrainErrorCode implements BaseCode {
 
 	//400 BAD REQUEST
 	NO_AVAILABLE_SEAT(HttpStatus.BAD_REQUEST, "예약 가능한 좌석이 없습니다."),
