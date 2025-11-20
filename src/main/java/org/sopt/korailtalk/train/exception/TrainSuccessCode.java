@@ -14,7 +14,7 @@ public enum TrainSuccessCode implements BaseSuccessCode {
 
 	//201 CREATED
 	GET_TRAIN_INFO_SUCCESS(HttpStatus.CREATED, "열차 정보 조회 및 예약 대기 처리가 성공하였습니다."),
-	;
+	GET_TRAINS_SUCCESS(HttpStatus.OK, "열차 목록 조회 성공");
 
 	private final HttpStatus httpStatus;
 	private final String message;
