@@ -1,11 +1,15 @@
 package org.sopt.korailtalk.train.presentation;
 
+import java.util.List;
+
+import org.sopt.korailtalk.coupon.presentation.dto.CouponInfo;
 import org.sopt.korailtalk.global.response.dto.SuccessResponse;
 
 import org.sopt.korailtalk.train.exception.TrainSuccessCode;
 import org.sopt.korailtalk.train.presentation.dto.TrainHomeInfoResponse;
 import org.sopt.korailtalk.train.presentation.dto.TrainInfoRequest;
 import org.sopt.korailtalk.train.presentation.dto.TrainInfoResponse;
+import org.sopt.korailtalk.train.service.TrainCouponFacade;
 import org.sopt.korailtalk.train.service.TrainReservationFacade;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,15 +28,19 @@ import lombok.RequiredArgsConstructor;
 public class TrainController {
 
 	private final TrainReservationFacade trainReservationFacade;
+	private final TrainCouponFacade	trainCouponFacade;
 
 	@PostMapping("/{trainId}")
-	ResponseEntity<SuccessResponse<TrainInfoResponse>> getTrainInfo(
+	ResponseEntity<SuccessResponse<TrainWithCouponsResponse>> getTrainInfo(
 		@PathVariable("trainId") Long trainId,
 		@RequestBody @Valid TrainInfoRequest request
 	) {
 
-		TrainInfoResponse response =
+		TrainInfoResponse trainInfo =
 			trainReservationFacade.reserveAndGetTrainInfo(trainId, request);
+		List<CouponInfo> couponInfo = trainCouponFacade.findAllCoupons();
+
+		TrainWithCouponsResponse response = new TrainWithCouponsResponse(trainInfo, couponInfo);
 
 		return ResponseEntity
 			.status(TrainSuccessCode.GET_TRAIN_INFO_SUCCESS.getHttpStatus())
