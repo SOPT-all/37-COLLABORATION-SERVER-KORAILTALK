@@ -45,7 +45,7 @@ public class TrainQueryRepositoryImpl implements TrainQueryRepository {
                         bookAvailableEq(isBookAvailable),
                         cursorLt(cursor)
                 )
-                .orderBy(train.id.desc())
+                .orderBy(train.id.asc())
                 .limit(20)
                 .fetch();
     }
