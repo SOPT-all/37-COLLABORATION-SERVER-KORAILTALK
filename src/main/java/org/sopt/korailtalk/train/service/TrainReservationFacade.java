@@ -5,6 +5,8 @@ import org.sopt.korailtalk.reservation.repository.ReservationQueueRepository;
 import org.sopt.korailtalk.train.domain.Train;
 import org.sopt.korailtalk.train.presentation.dto.TrainInfoRequest;
 import org.sopt.korailtalk.train.presentation.dto.TrainInfoResponse;
+import org.sopt.korailtalk.train.presentation.dto.TrainsRequest;
+import org.sopt.korailtalk.train.presentation.dto.TrainsResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

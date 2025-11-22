@@ -1,5 +1,6 @@
 package org.sopt.korailtalk.train.domain;
 
+import org.sopt.korailtalk.global.domain.SeatStatus;
 import org.sopt.korailtalk.global.exception.BusinessException;
 import org.sopt.korailtalk.train.exception.TrainErrorCode;
 
@@ -43,4 +44,7 @@ public class PremiumSeat {
     this.remainingSeats++;
   }
 
+  public SeatStatus getStatus() {
+    return SeatStatus.from((int)(1.0- (double)remainingSeats/(double)totalSeats) * 100);
+  }
 }
