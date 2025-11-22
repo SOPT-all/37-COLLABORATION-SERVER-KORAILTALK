@@ -28,9 +28,4 @@ public class TrainReservationFacade {
 		return trainService.getTrainInfo(trainId, request, reservationId);
 
 	}
-
-
-	public TrainsResponse getTrains(TrainsRequest request) {
-		return trainService.getTrains(request);
-	}
 }

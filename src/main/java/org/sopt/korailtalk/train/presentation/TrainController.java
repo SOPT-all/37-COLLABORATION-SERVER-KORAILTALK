@@ -8,6 +8,7 @@ import org.sopt.korailtalk.train.presentation.dto.TrainInfoResponse;
 import org.sopt.korailtalk.train.presentation.dto.TrainsRequest;
 import org.sopt.korailtalk.train.presentation.dto.TrainsResponse;
 import org.sopt.korailtalk.train.service.TrainReservationFacade;
+import org.sopt.korailtalk.train.service.TrainService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class TrainController {
 
 	private final TrainReservationFacade trainReservationFacade;
+	private final TrainService trainService;
 
 	@PostMapping("{trainId}")
 	ResponseEntity<SuccessResponse<TrainInfoResponse>> getTrainInfo(
@@ -39,7 +41,7 @@ public class TrainController {
 	ResponseEntity<SuccessResponse<TrainsResponse>> getTrains(
 		@ModelAttribute TrainsRequest request
 	) {
-		TrainsResponse response = trainReservationFacade.getTrains(request);
+		TrainsResponse response = trainService.getTrains(request);
 
 		return ResponseEntity
 				.status(TrainSuccessCode.GET_TRAINS_SUCCESS.getHttpStatus())
