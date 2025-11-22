@@ -15,10 +15,10 @@ public enum SeatStatus {
         return description;
     }
 
-    public static SeatStatus from(int remainingSeats) {
-        if (remainingSeats > 5) {
+    public static SeatStatus from(int remainingSeatsRate) {
+        if (remainingSeatsRate > 5) {
             return SeatStatus.AVAILABLE;
-        } else if (remainingSeats > 0) {
+        } else if (remainingSeatsRate > 0) {
             return SeatStatus.ALMOST_SOLD_OUT;
         } else {
             return SeatStatus.SOLD_OUT;
