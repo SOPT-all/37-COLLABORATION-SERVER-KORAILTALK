@@ -44,16 +44,6 @@ public class TrainServiceImpl implements TrainService {
 			.orElseThrow(()-> new BusinessException(TrainErrorCode.TRAIN_NOT_FOUND));
 	}
 
-	private Integer seatPriceReturnerBySeatType(Train train, SeatType seatType) {
-		Integer price;
-		if (seatType == SeatType.NORMAL) {
-			price = train.getNormalSeat().getPrice();
-		} else {
-			price = train.getPremiumSeat().getPrice();
-		}
-		return price;
-	}
-
 	public TrainsResponse getTrains(TrainsRequest request) {
 
 		List<Train> trains = trainRepository.findTrainsByFilter(
@@ -84,5 +74,15 @@ public class TrainServiceImpl implements TrainService {
 				nextCursor,
 				trains
 		);
+	}
+
+	private Integer seatPriceReturnerBySeatType(Train train, SeatType seatType) {
+		Integer price;
+		if (seatType == SeatType.NORMAL) {
+			price = train.getNormalSeat().getPrice();
+		} else {
+			price = train.getPremiumSeat().getPrice();
+		}
+		return price;
 	}
 }
