@@ -10,6 +10,5 @@ public interface TrainService {
 
 	TrainInfoResponse getTrainInfo(Long trainId, TrainInfoRequest request, Long reservationId);
 	Train findById(Long trainId);
-
 	TrainsResponse getTrains(TrainsRequest request);
 }
