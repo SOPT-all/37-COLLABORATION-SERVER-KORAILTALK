@@ -29,6 +29,8 @@ public class TrainServiceImpl implements TrainService {
 		train.decreaseRemainingSeat(seatType);
 
 		return TrainInfoResponse.of(
+			train.getOrigin(),
+			train.getDestination(),
 			train.getStartAt().format(TIME_FORMATTER),
 			train.getArriveAt().format(TIME_FORMATTER),
 			train.getTrainType(),
