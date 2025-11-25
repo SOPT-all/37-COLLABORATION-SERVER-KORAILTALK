@@ -4,6 +4,8 @@ import org.sopt.korailtalk.global.domain.SeatType;
 import org.sopt.korailtalk.global.domain.TrainType;
 
 public record TrainInfoResponse(
+	String origin,
+	String destination,
 	String startAt,
 	String arriveAt,
 	TrainType type,
@@ -13,6 +15,8 @@ public record TrainInfoResponse(
 	Long reservationId
 ) {
 	public static TrainInfoResponse of(
+		String origin,
+		String destination,
 		String startAt,
 		String arriveAt,
 		TrainType type,
@@ -21,6 +25,6 @@ public record TrainInfoResponse(
 		Integer price,
 		Long reservationId
 	) {
-		return new TrainInfoResponse(startAt, arriveAt, type, trainNumber, seatType, price, reservationId);
+		return new TrainInfoResponse(origin, destination, startAt, arriveAt, type, trainNumber, seatType, price, reservationId);
 	}
 }
