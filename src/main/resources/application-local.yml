@@ -9,9 +9,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${LOCAL_DB_URL:jdbc:mysql://localhost:3306/korailTalk}
+    url: ${LOCAL_DB_URL:jdbc:mysql://52.79.65.128:3306/korailTalk?serverTimezone=Asia/Seoul&characterEncoding=UTF-8}
     username: ${LOCAL_DB_USERNAME:root}
-    password: ${LOCAL_DB_PASSWORD:password}
+    password: ${LOCAL_DB_PASSWORD:root}
 
   jpa:
     hibernate:
