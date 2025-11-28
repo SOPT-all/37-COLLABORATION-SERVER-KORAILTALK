@@ -45,6 +45,6 @@ public class PremiumSeat {
   }
 
   public SeatStatus getStatus() {
-    return SeatStatus.from((int)((1.0-((double)remainingSeats/(double)totalSeats)) * 100));
+    return SeatStatus.from((int)(((double)remainingSeats/(double)totalSeats) * 100));
   }
 }

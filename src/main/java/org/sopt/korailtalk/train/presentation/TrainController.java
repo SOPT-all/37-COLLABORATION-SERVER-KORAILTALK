@@ -3,6 +3,8 @@ package org.sopt.korailtalk.train.presentation;
 import java.util.List;
 
 import org.sopt.korailtalk.coupon.presentation.dto.CouponInfo;
+import org.sopt.korailtalk.global.domain.SeatType;
+import org.sopt.korailtalk.global.domain.TrainType;
 import org.sopt.korailtalk.global.response.dto.SuccessResponse;
 
 import org.sopt.korailtalk.train.exception.TrainSuccessCode;
@@ -65,8 +67,22 @@ public class TrainController {
 
 	@GetMapping
 	ResponseEntity<SuccessResponse<TrainsResponse>> getTrains(
-		@ModelAttribute TrainsRequest request
+			@RequestParam String origin,
+			@RequestParam String destination,
+			@RequestParam(required = false) String trainType,
+			@RequestParam(required = false) String seatType,
+			@RequestParam(required = false) Boolean isBookAvailable,
+			@RequestParam(required = false) String cursor
 	) {
+
+		TrainsRequest request = new TrainsRequest(
+				origin,
+				destination,
+				TrainType.of(trainType),
+				seatType != null ? SeatType.of(seatType) : null,
+				isBookAvailable,
+				cursor
+		);
 		TrainsResponse response = trainService.getTrains(request);
 
 		return ResponseEntity

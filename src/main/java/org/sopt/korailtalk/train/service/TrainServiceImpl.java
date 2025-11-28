@@ -59,7 +59,7 @@ public class TrainServiceImpl implements TrainService {
 
 		String nextCursor = trains.isEmpty() ?
 				null :
-				String.valueOf(trains.get(trains.size() - 1).getId());
+				String.valueOf(trains.get(trains.size() - 1).getStartAt());
 
 		int total = trainRepository.countTrainsByFilter(
 				request.origin(),

@@ -1,11 +1,12 @@
 package org.sopt.korailtalk.train.presentation.dto;
 
-import org.sopt.korailtalk.global.domain.TrainType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.sopt.korailtalk.train.domain.Train;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public record TrainsResponse(
         String origin,
         String destination,
@@ -29,15 +30,16 @@ public record TrainsResponse(
                 nextCursor,
                 trains.stream().map(
                         train -> new TrainInfo(
-                                train.getTrainType(),
+                                train.getId(),
+                                train.getTrainType().getValue(),
                                 train.getTrainNumber(),
                                 train.getStartAt().format(timeFormatter),
                                 train.getArriveAt().format(timeFormatter),
                                 train.getDuration(),
                                 train.getNormalSeat().getStatus().getDescription(),
-                                train.getPremiumSeat().getStatus().getDescription(),
+                                train.getPremiumSeat() != null? train.getPremiumSeat().getStatus().getDescription() : null,
                                 train.getNormalSeat().getPrice(),
-                                train.getPremiumSeat().getPrice()
+                                train.getPremiumSeat() != null ? train.getPremiumSeat().getPrice() : null
                         )
                 ).toList()
 
@@ -45,14 +47,15 @@ public record TrainsResponse(
     }
 
     private record TrainInfo (
-        TrainType type,
+        Long trainId,
+        String type,
         String trailNumber,
         String startAt,
         String arriveAt,
-        int duration,
+        Integer duration,
         String normalSeatStatus,
         String premiumSeatStatus,
-        int normalSeatPrice,
-        int premiumSeatPrice
+        Integer normalSeatPrice,
+        Integer premiumSeatPrice
     ){}
 }

@@ -10,6 +10,8 @@ import org.sopt.korailtalk.train.domain.QPremiumSeat;
 import org.sopt.korailtalk.train.domain.QTrain;
 import org.sopt.korailtalk.train.domain.Train;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +47,7 @@ public class TrainQueryRepositoryImpl implements TrainQueryRepository {
                         bookAvailableEq(isBookAvailable),
                         cursorLt(cursor)
                 )
-                .orderBy(train.id.asc())
+                .orderBy(train.startAt.asc())
                 .limit(20)
                 .fetch();
     }
@@ -108,6 +110,11 @@ public class TrainQueryRepositoryImpl implements TrainQueryRepository {
     }
 
     private BooleanExpression cursorLt(String cursor) {
-        return (cursor != null) ? QTrain.train.id.lt(Long.valueOf(cursor)) : null;
+        if (cursor == null) return null;
+
+        LocalDateTime cursorTime = LocalDateTime.parse(cursor);
+
+        return QTrain.train.startAt.gt(cursorTime);
     }
+
 }
